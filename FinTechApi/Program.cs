@@ -18,9 +18,14 @@ builder.Services.AddDbContext<FinTechContext>(options =>
     options.UseSqlServer(connectionString));
 
 
+
+
+
+
 // Register specialized repository implementations (overrides generic for the same service).
 builder.Services.AddScoped<IAsyncRepository<Customer, Guid>, CustomerRepository>();
-
+builder.Services.AddScoped<IAsyncRepository<Order, Guid>, EfRepository<Order, Guid>>();
+builder.Services.AddScoped<IAsyncRepository<Trade, Guid>, EfRepository<Trade, Guid>>();
 // Domain services
 builder.Services.AddScoped<IOrderService, OrderService>();
 
